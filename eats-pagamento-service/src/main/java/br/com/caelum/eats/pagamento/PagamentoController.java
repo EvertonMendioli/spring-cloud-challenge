@@ -1,6 +1,8 @@
 package br.com.caelum.eats.pagamento;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -15,7 +17,10 @@ import java.util.stream.Collectors;
 class PagamentoController {
 
 	private PagamentoRepository pagamentoRepo;
-	private PedidoClienteComFeign pedidoCliente;
+	//private PedidoClienteComFeign pedidoCliente;
+	@Autowired
+	private AtualizaStatus atualizaStatus;
+
 
 	@GetMapping
 	ResponseEntity<List<PagamentoDto>> lista() {
@@ -43,8 +48,12 @@ class PagamentoController {
 	@PutMapping("/{id}")
 	PagamentoDto confirma(@PathVariable("id") Long id) {
 		Pagamento pagamento = pagamentoRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
-		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
-		pedidoCliente.notificaServicoDePedidoParaMudarStatus(pagamento.getPedidoId(), new MudancaDeStatusDoPedido("pago"));
+		//pagamento.setStatus(Pagamento.Status.CONFIRMADO);
+		
+		
+		pagamento.setStatus(atualizaStatus.atualizaStatusPedido(pagamento.getPedidoId()));
+		//pedidoCliente.notificaServicoDePedidoParaMudarStatus(pagamento.getPedidoId(), new MudancaDeStatusDoPedido("pago"));
+		
 		pagamentoRepo.save(pagamento);
 		return new PagamentoDto(pagamento);
 	}
