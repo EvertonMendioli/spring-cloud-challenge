@@ -24,10 +24,11 @@ class PagamentoController {
 
 	@GetMapping
 	ResponseEntity<List<PagamentoDto>> lista() {
-		return ResponseEntity.ok(pagamentoRepo.findAll()
-				.stream()
-				.map(PagamentoDto::new)
-				.collect(Collectors.toList()));
+		return atualizaStatus.listarPedidos(pagamentoRepo);
+//		return ResponseEntity.ok(pagamentoRepo.findAll()
+//				.stream()
+//				.map(PagamentoDto::new)
+//				.collect(Collectors.toList()));
 	}
 
 	@GetMapping("/{id}")
