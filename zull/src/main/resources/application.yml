@@ -14,20 +14,3 @@ management:
       exposure:
         include:
         - "routes"        
-
-
-zuul:
-  routes:
-    pagamentos:
-    path: /pagamentos/**
-    url: pagamentos
-    serviceId: pagamentos
-    distancia:
-    path: /distancia/**
-    url: distancia
-    serviceId: distancia
-    legacy:
-    path: /**
-    url: monolito
-    serviceId: monolito
-    

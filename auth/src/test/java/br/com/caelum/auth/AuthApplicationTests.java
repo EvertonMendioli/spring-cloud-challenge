@@ -1,11 +1,10 @@
-package br.com.caelum.zuul;
-
+package br.com.caelum.auth;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ZullApplicationTests {
+class AuthApplicationTests {
 
 	@Test
 	void contextLoads() {
