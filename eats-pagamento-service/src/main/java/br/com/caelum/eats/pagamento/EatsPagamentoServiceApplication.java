@@ -1,6 +1,6 @@
 package br.com.caelum.eats.pagamento;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -24,7 +24,7 @@ public class EatsPagamentoServiceApplication {
 		return new RequestInterceptor() {
 			@Override
 			public void apply(RequestTemplate template) {
-				org.springframework.security.core.Authentication  authentication = SecurityContextHolder.getContext().getAuthentication();
+				Authentication  authentication = SecurityContextHolder.getContext().getAuthentication();
 				 if(authentication==null) {
 					 return;
 				 }
