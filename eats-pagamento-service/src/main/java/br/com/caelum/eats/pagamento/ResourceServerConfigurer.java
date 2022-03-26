@@ -13,7 +13,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
 
 		http.authorizeRequests()
 			.antMatchers(HttpMethod.PUT, "/pagamentos/{id}")
-			.hasAnyRole("CLIENTE","ADMINISTRATIVO");
+			.hasAnyRole("CLIENTE", "ADMINISTRATIVO");
 		
 
 	}
